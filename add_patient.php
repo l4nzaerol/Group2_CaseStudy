@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sissssidds", $name, $age, $gender, $symptoms, $medical_history, $blood_pressure, $heart_rate, $temperature, $weight, $diagnostic_tests);
 
     if ($stmt->execute()) {
-        echo "<div class='alert alert-success'>Patient added successfully!</div>";
+        echo "<div class='alert alert-success text-center'>Patient added successfully!</div>";
     } else {
-        echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+        echo "<div class='alert alert-danger text-center'>Error: " . $stmt->error . "</div>";
     }
 }
 ?>
@@ -31,39 +31,84 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Add Patient</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             background: #f4f6f9;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            min-height: 100vh;
             padding: 20px;
         }
         .container {
             max-width: 900px;
+            width: 100%;
             padding: 30px;
             background: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .header i {
+            margin-right: 10px;
+        }
+        h2, h4 {
+            margin-bottom: 20px;
         }
         h2 {
-            text-align: center;
             color: #007bff;
-            margin-bottom: 20px;
+        }
+        .section-header {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
         }
         .btn-primary {
             background-color: #007bff;
             border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
             background-color: #0056b3;
+        }
+        .btn-secondary {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Add Patient</h2>
+        <div class="header">Add Patient</div>
         <form action="add_patient.php" method="POST">
             <div class="row mb-3">
                 <div class="col-md-4">
@@ -91,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
 
-            <h4 class="mt-4 text-primary">Subjective Data</h4>
+            <h4 class="section-header">Subjective Data</h4>
             <div class="mb-3">
                 <label class="form-label">Symptoms:</label>
                 <textarea name="symptoms" class="form-control" required></textarea>
@@ -101,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea name="medical_history" class="form-control" required></textarea>
             </div>
 
-            <h4 class="mt-4 text-primary">Objective Data</h4>
+            <h4 class="section-header">Objective Data</h4>
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label class="form-label">Blood Pressure (e.g., 120/80 mmHg):</label>
@@ -128,12 +173,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Add Patient</button>
-                <a href="dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Add Patient</button>
+                <a href="dashboard.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
             </div>
         </form>
     </div>
 </body>
 </html>
-
-
