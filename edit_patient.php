@@ -44,61 +44,81 @@ $patient = $result->fetch_assoc();
 <head>
     <title>Edit Patient SOAP</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <style>
         body {
-            background-color:rgb(229, 242, 255);
+            background-color: #eef2f3;
         }
         .container {
-            max-width: 1000px;
+            max-width: 900px;
+            margin-top: 40px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            color: white;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .card {
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             background: white;
-            margin-bottom: 20px;
-        }
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-        }
-        .patient-name {
-            font-size: 20px;
-            font-weight: bold;
         }
         .form-control {
             border-radius: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0,123,255,0.3);
+        }
+        .btn {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background 0.3s ease;
         }
         .btn-primary {
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-weight: bold;
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
         }
         .btn-danger {
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-weight: bold;
+            background-color: #dc3545;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #b02a37;
         }
     </style>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <div class="header">
-        <span class="patient-name">Patient: <?= htmlspecialchars($patient['name']) ?></span>
+       Edit Patient SOAP
     </div>
     <div class="card">
-        <h4 class="text-center mb-3">Update Patient SOAP</h4>
         <form method="POST">
             <div class="mb-3">
                 <label class="form-label"><strong>Diagnosis:</strong></label>
                 <textarea name="diagnosis" class="form-control" rows="3" required><?= htmlspecialchars($patient['diagnosis']) ?></textarea>
             </div>
-            <h5 class="mt-3">Treatment Plan</h5>
             <div class="mb-3">
+                <h5 class="mt-3">Treatment Plan</h5>
                 <label class="form-label"><strong>Medications:</strong></label>
                 <textarea name="medications" class="form-control" rows="3"><?= htmlspecialchars($patient['medications']) ?></textarea>
             </div>
@@ -111,8 +131,8 @@ $patient = $result->fetch_assoc();
                 <textarea name="follow_ups" class="form-control" rows="2"><?= htmlspecialchars($patient['follow_ups']) ?></textarea>
             </div>
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Update SOAP</button>
-                <a href="view_patient.php?id=<?= $patient_id ?>" class="btn btn-danger">Cancel</a>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update SOAP</button>
+                <a href="dashboard.php?id=<?= $patient_id ?>" class="btn btn-danger"><i class="fas fa-times"></i> Cancel</a>
             </div>
         </form>
     </div>
