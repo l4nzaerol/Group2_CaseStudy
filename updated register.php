@@ -61,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 20px;
+            text-align: center;
         }
         label {
             font-size: 16px;
@@ -124,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container mt-5">
-        <h2>User Registration</h2>
+        <h2>Registration</h2>
         <form action="register.php" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>
